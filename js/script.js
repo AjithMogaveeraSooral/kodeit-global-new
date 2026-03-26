@@ -13,12 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(registrationForm);
         formData.append('location', 'Dammam');
 
-        // Collect schedule radio values
-        const wedChecked = document.querySelector('input[name="wednesday_schedule"]:checked');
-        if (wedChecked) formData.set('wednesday_schedule', wedChecked.value);
+        // Collect schedule checkbox values
+        const wedChecked = document.querySelectorAll('input[name="wednesday_schedule"]:checked');
+        const wedValues = Array.from(wedChecked).map(cb => cb.value).join(', ');
+        formData.set('wednesday_schedule', wedValues);
 
-        const satChecked = document.querySelector('input[name="saturday_schedule"]:checked');
-        if (satChecked) formData.set('saturday_schedule', satChecked.value);
+        const satChecked = document.querySelectorAll('input[name="saturday_schedule"]:checked');
+        const satValues = Array.from(satChecked).map(cb => cb.value).join(', ');
+        formData.set('saturday_schedule', satValues);
 
         fetch(scriptURL, { 
             method: 'POST', 
@@ -52,15 +54,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Update placeholder text when radio selection changes and close dropdown
-    document.querySelectorAll('.schedule-dropdown input[type="radio"]').forEach(function(rb) {
-        rb.addEventListener('change', function() {
+    // Update placeholder text when checkboxes change
+    document.querySelectorAll('.schedule-dropdown input[type="checkbox"]').forEach(function(cb) {
+        cb.addEventListener('change', function() {
             const dropdown = this.closest('.schedule-dropdown');
+            const checked = dropdown.querySelectorAll('input[type="checkbox"]:checked');
             const placeholder = dropdown.querySelector('.placeholder-text');
-            placeholder.textContent = this.value;
-            // Auto-close dropdown after selection
-            dropdown.querySelector('.checkboxes-container').style.display = 'none';
-            dropdown.querySelector('.arrow').classList.remove('open');
+            if (checked.length > 0) {
+                const names = Array.from(checked).map(c => c.value.split('— ')[1] || c.value);
+                placeholder.textContent = names.join(', ');
+            } else {
+                placeholder.textContent = 'Select your schedule';
+            }
         });
     });
 });
