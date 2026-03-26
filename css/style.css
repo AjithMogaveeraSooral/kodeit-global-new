@@ -84,7 +84,7 @@ h1 {
 .logo-row {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 25px;
 }
 
 .main-logo {
