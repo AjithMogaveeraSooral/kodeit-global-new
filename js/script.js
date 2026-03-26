@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registrationForm');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxiLTVKTsee6-QA-4Br4RnwTDL5xvnfNXgQqjnaTiTppeniLWpAuGgH3-qvJftiM2a-Mg/exec'; // <--- Paste your App Script URL here
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwlDqL9Py14FyUl1DHjUriIfMvGhcaLrABlT8r3Fo7d4Ne7qcPZrH8dn6x7Pki0sIn5Rw/exec'; // <--- Paste your App Script URL here
 
     registrationForm.addEventListener('submit', function(e) {
         e.preventDefault();
