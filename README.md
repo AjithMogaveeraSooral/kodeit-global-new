@@ -1,2 +1,2 @@
-# kodeit-global-new
-brew install git
+# kodeit-educator-event
+Kodeit Educator Event
