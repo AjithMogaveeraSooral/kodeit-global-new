@@ -99,13 +99,23 @@
                 </label>
 
                 <div class="phone-input-container">
-                  <div class="flag-wrapper">
-                    <img
-                      src="images/uae-flag.svg"
-                      alt="UAE Flag"
-                      class="phone-flag-img"
-                    />
-                    <span class="country-code">+971</span>
+                  <div class="country-code-dropdown" id="countryCodeDropdown">
+                    <div class="country-code-selected" onclick="toggleCountryDropdown()">
+                      <img src="images/uae-flag.svg" alt="UAE Flag" class="phone-flag-img" id="selectedFlag" />
+                      <span class="country-code" id="selectedCode">+971</span>
+                      <span class="country-arrow">&#9662;</span>
+                    </div>
+                    <div class="country-code-options" id="countryOptions">
+                      <div class="country-option" data-code="971" data-flag="images/uae-flag.svg" data-label="UAE">
+                        <img src="images/uae-flag.svg" alt="UAE" class="phone-flag-img" />
+                        <span>+971</span>
+                      </div>
+                      <div class="country-option" data-code="966" data-flag="images/uae-flag.webp" data-label="KSA">
+                        <img src="images/uae-flag.webp" alt="KSA" class="phone-flag-img" />
+                        <span>+966</span>
+                      </div>
+                    </div>
+                  </div>
 
                   <div class="vertical-line"></div>
 
@@ -122,7 +132,7 @@
                   type="hidden"
                   name="country_code"
                   id="country_code_input"
-                  value="+966"
+                  value="971"
                 />
               </div>
 

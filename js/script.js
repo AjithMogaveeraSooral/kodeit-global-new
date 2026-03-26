@@ -23,6 +23,11 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData(registrationForm);
         formData.append('location', 'Dammam');
 
+        // Send country_code + mobile together without "+"
+        const countryCode = document.getElementById('country_code_input').value;
+        const mobileNum = formData.get('mobile');
+        formData.set('mobile', countryCode + mobileNum);
+
         // Collect schedule checkbox values
         const wedChecked = document.querySelectorAll('input[name="wednesday_schedule"]:checked');
         const wedValues = Array.from(wedChecked).map(cb => cb.value).join(', ');
@@ -69,13 +74,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Close schedule dropdowns when clicking outside
+    // Close schedule dropdowns and country dropdown when clicking outside
     document.addEventListener('click', function(e) {
         document.querySelectorAll('.schedule-dropdown').forEach(function(dropdown) {
             if (!dropdown.contains(e.target)) {
                 dropdown.querySelector('.checkboxes-container').style.display = 'none';
                 dropdown.querySelector('.arrow').classList.remove('open');
             }
+        });
+
+        // Close country code dropdown
+        var countryDropdown = document.getElementById('countryCodeDropdown');
+        if (countryDropdown && !countryDropdown.contains(e.target)) {
+            document.getElementById('countryOptions').style.display = 'none';
+        }
+    });
+
+    // Country code option selection
+    document.querySelectorAll('.country-option').forEach(function(option) {
+        option.addEventListener('click', function() {
+            var code = this.getAttribute('data-code');
+            var flag = this.getAttribute('data-flag');
+            var label = this.getAttribute('data-label');
+            document.getElementById('selectedFlag').src = flag;
+            document.getElementById('selectedFlag').alt = label + ' Flag';
+            document.getElementById('selectedCode').textContent = '+' + code;
+            document.getElementById('country_code_input').value = code;
+            document.getElementById('countryOptions').style.display = 'none';
         });
     });
 
@@ -100,6 +125,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+function toggleCountryDropdown() {
+    event.stopPropagation();
+    var options = document.getElementById('countryOptions');
+    options.style.display = options.style.display === 'block' ? 'none' : 'block';
+}
 
 function toggleScheduleDropdown(id) {
     event.stopPropagation();

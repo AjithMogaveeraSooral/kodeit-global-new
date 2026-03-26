@@ -474,6 +474,58 @@ h1 {
   white-space: nowrap;
 }
 
+.country-code-dropdown {
+  position: relative;
+}
+
+.country-code-selected {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+  transition: background 0.2s;
+}
+
+.country-code-selected:hover {
+  background: #f0f4f8;
+}
+
+.country-arrow {
+  font-size: 10px;
+  color: #888;
+}
+
+.country-code-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  min-width: 120px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.country-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s;
+}
+
+.country-option:hover {
+  background: #f0f7ff;
+}
+
 .vertical-line {
   width: 1px;
   height: 24px;
