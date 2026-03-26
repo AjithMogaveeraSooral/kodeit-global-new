@@ -118,7 +118,7 @@ h1 {
   background-repeat: no-repeat;
   padding: 24px;
   border-radius: 20px;
-  border: 1px solid #15226f;
+  border: 1px solid var(--accent-blue);
   min-height: 795px;
   display: flex;
   flex-direction: column;
@@ -644,6 +644,13 @@ h1 {
   font-size: 14px;
   color: #595959;
   margin: 10px 0 0 0;
+  font-family: "Gilroy", sans-serif;
+}
+
+.schedule-error {
+  font-size: 13px;
+  color: #e74c3c;
+  margin: 6px 0 0 0;
   font-family: "Gilroy", sans-serif;
 }
 

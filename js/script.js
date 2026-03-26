@@ -5,6 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
     registrationForm.addEventListener('submit', function(e) {
         e.preventDefault();
 
+        // Validate at least one schedule checkbox is selected
+        const allScheduleCheckboxes = document.querySelectorAll('.schedule-dropdown input[type="checkbox"]:checked');
+        const scheduleError = document.getElementById('scheduleError');
+        if (allScheduleCheckboxes.length === 0) {
+            scheduleError.style.display = 'block';
+            scheduleError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+        scheduleError.style.display = 'none';
+
         const submitBtn = document.querySelector('.btn-submit-modern');
         const originalText = submitBtn.innerText;
         submitBtn.innerText = "Processing...";
@@ -21,6 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const satChecked = document.querySelectorAll('input[name="saturday_schedule"]:checked');
         const satValues = Array.from(satChecked).map(cb => cb.value).join(', ');
         formData.set('saturday_schedule', satValues);
+
+        const mon6Checked = document.querySelectorAll('input[name="monday6_schedule"]:checked');
+        formData.set('monday6_schedule', Array.from(mon6Checked).map(cb => cb.value).join(', '));
+
+        const wed8Checked = document.querySelectorAll('input[name="wednesday8_schedule"]:checked');
+        formData.set('wednesday8_schedule', Array.from(wed8Checked).map(cb => cb.value).join(', '));
+
+        const sat11Checked = document.querySelectorAll('input[name="saturday11_schedule"]:checked');
+        formData.set('saturday11_schedule', Array.from(sat11Checked).map(cb => cb.value).join(', '));
+
+        const mon13Checked = document.querySelectorAll('input[name="monday13_schedule"]:checked');
+        formData.set('monday13_schedule', Array.from(mon13Checked).map(cb => cb.value).join(', '));
+
+        const sat18Checked = document.querySelectorAll('input[name="saturday18_schedule"]:checked');
+        formData.set('saturday18_schedule', Array.from(sat18Checked).map(cb => cb.value).join(', '));
 
         fetch(scriptURL, { 
             method: 'POST', 
@@ -57,6 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update placeholder text when checkboxes change
     document.querySelectorAll('.schedule-dropdown input[type="checkbox"]').forEach(function(cb) {
         cb.addEventListener('change', function() {
+            // Hide schedule error if any checkbox is now checked
+            var anyChecked = document.querySelectorAll('.schedule-dropdown input[type="checkbox"]:checked').length > 0;
+            if (anyChecked) {
+                document.getElementById('scheduleError').style.display = 'none';
+            }
+
             const dropdown = this.closest('.schedule-dropdown');
             const checked = dropdown.querySelectorAll('input[type="checkbox"]:checked');
             const placeholder = dropdown.querySelector('.placeholder-text');
