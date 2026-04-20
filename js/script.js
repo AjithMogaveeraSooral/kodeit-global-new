@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const registrationForm = document.getElementById('registrationForm');
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbw6eqcKIpByOh7ywTzI2w8LnJs8U_gnfxwwEhHjycjXJbYfMn3baEv1bOwpkPSBClizJA/exec'; // <--- Paste your App Script URL here
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyuN2BFkRhYdGdi0cXuLr9kBYtQJ_csOWjY1CXv4OpAwPCXhoOpOm5aLUFDJeDdgTTOSA/exec'; // <--- Paste your App Script URL here
 
     registrationForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -36,6 +36,18 @@ document.addEventListener('DOMContentLoaded', function() {
             'saturday25_study_sync_schedule'
         ];
         sat25ScheduleNames.forEach(name => {
+            const cb = document.querySelector('input[name="' + name + '"]:checked');
+            if (cb) formData.set(name, cb.value);
+        });
+
+        // Collect Wednesday 29 April schedule checkboxes (each has its own name)
+        const wed29ScheduleNames = [
+            'wednesday29_inspire_science_schedule',
+            'wednesday29_wonders_schedule',
+            'wednesday29_reveal_math_schedule',
+            'wednesday29_study_sync_schedule'
+        ];
+        wed29ScheduleNames.forEach(name => {
             const cb = document.querySelector('input[name="' + name + '"]:checked');
             if (cb) formData.set(name, cb.value);
         });
